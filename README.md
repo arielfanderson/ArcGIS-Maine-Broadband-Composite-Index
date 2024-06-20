@@ -46,8 +46,10 @@ Social Vulnerability includes:
 ACS data was available by township and did not require preprocessing. However, healthcare data was provided by zipcode, which required preprocessing to the appropriate spatial unit. [Areal Interpolation](https://pro.arcgis.com/en/pro-app/latest/help/analysis/geostatistical-analyst/what-is-areal-interpolation.htm), as suggested by ESRI best practices for Composite Index calculation, was used to reaggregate the healthcare data to the appropriate spatial unit. Interpolation is a method to aggregate data through prediction by fitting the data to a statistical model.  
 
 Because Areal Interpolation relies on modeling data, it was determined that a K-Bessel model was an appropriate fit producing a Root Mean Square Standardization of 1.528, which should be ideally close to 1, and neighbor weights of 1 minimum to 10 maximum. 
+![alt text](https://github.com/arielfanderson/Maine-BroadBand-Composite-Index/blob/main/areal_interpolation.png) "Areal Interpolation")
 
-### K-Bessel Model for Areal Interpolation 
+
+K-Bessel Model for Areal Interpolation 
 
 Normal QQ Plot and Summary for K-Bessel Model 
 
