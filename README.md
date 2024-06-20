@@ -34,26 +34,35 @@ Social Vulnerability was the first dimension determined for this analysis. In a 
 The first step of this analysis looks at the social vulnerability at the subcounty level in Maine. Subcounties are defined by the Census Bureau, [read more about subcounty divisions](https://www2.census.gov/geo/pdfs/reference/GARM/Ch8GARM.pdf). 
 
 Social Vulnerability includes: 
-	* Rate of High School Graduation ([ACS Data](https://www.census.gov/programs-surveys/acs))
-	* Average Driving Distance from a Primary Care Provider (provided by John Snow Institute, this is not publically accessible data) 
-	* Rate of Unemployment ([ACS Data](https://www.census.gov/programs-surveys/acs))
-	* Whether or not a sub county is rural by [NTIA](https://www.ntia.gov/). (In Maine all subcounties are considered rural except by NTIA for: Falmouth, Westbrook, Portland, and South Portland) 
-	* Rate of incarceration ([2020 DEC Redistrciting Data](https://www.census.gov/programs-surveys/decennial-census/about/rdo/summary-files.html)]
+* Rate of High School Graduation ([ACS Data](https://www.census.gov/programs-surveys/acs))
+* Average Driving Distance from a Primary Care Provider (provided by John Snow Institute, this is not publically accessible data) 
+* Rate of Unemployment ([ACS Data](https://www.census.gov/programs-surveys/acs))
+* Whether or not a sub county is rural by [NTIA](https://www.ntia.gov/). (In Maine all subcounties are considered rural except by NTIA for: Falmouth, Westbrook, Portland, and South Portland) 
+* Rate of incarceration ([2020 DEC Redistrciting Data](https://www.census.gov/programs-surveys/decennial-census/about/rdo/summary-files.html)]
  * [Covered Population Data from the American Census Survey](https://www.census.gov/programs-surveys/acs) (Rate of Population over the age of 60, Rate of Veterans, Limited English Households, Disability, & Rate of Ethnic or Racial Minorities)
 
 ### Preprocessing Social Vulnerability Data: 
 
-ACS data was available by township and did not require preprocessing. However, healthcare data was provided by zipcode, which required preprocessing to the appropriate spatial unit. [Areal Interpolation](https://pro.arcgis.com/en/pro-app/latest/help/analysis/geostatistical-analyst/what-is-areal-interpolation.htm), as suggested by ESRI best practices for Composite Index calculation, was used to reaggregate the healthcare data to the appropriate spatial unit. Interpolation is a method to aggregate data through prediction by fitting the data to a statistical model.  
+ACS data and Rate of Incraceration data was available by township and did not require preprocessing for spatial units. However, this data was processed to reflect a percentage or rate per township to be used with a SVI scoring system of 0 to 1. Rural NTIA data was available at the township level and was assigned a score of 0 for non rural areas, and 1 for rural areas. 
+
+Healthcare data was provided by zipcode, which required preprocessing to the appropriate spatial unit. It should be noted that healthcare availbility is measured as minutes a person needs to drive to see a physician. [Areal Interpolation](https://pro.arcgis.com/en/pro-app/latest/help/analysis/geostatistical-analyst/what-is-areal-interpolation.htm), as suggested by ESRI best practices for Composite Index calculation, was used to reaggregate the healthcare data to the appropriate spatial unit of Maine Townships. Interpolation is a method to aggregate data through prediction by fitting the data to a statistical model. 
 
 Because Areal Interpolation relies on modeling data, it was determined that a K-Bessel model was an appropriate fit producing a Root Mean Square Standardization of 1.528, which should be ideally close to 1, and neighbor weights of 1 minimum to 10 maximum. 
 
-### K-Bessel Model for Areal Interpolation 
+#### K-Bessel Model for Areal Interpolation 
+![alt text](https://github.com/arielfanderson/Maine-BroadBand-Composite-Index/blob/main/areal_interpolation.png "Areal Interpolation")
 
-Normal QQ Plot and Summary for K-Bessel Model 
+
+#### Normal QQ Plot and Summary for K-Bessel Model 
+![alt text](https://github.com/arielfanderson/Maine-BroadBand-Composite-Index/blob/main/normalqq.png "Normal QQ Plot") 
 
 ### Social Vulnerability Scoring System 
 
+Once all data was preproccessed to reflect the same spatial units, Maine townships, all data was compiled into ArcGIS. For a composite index, it's important that all data is in the same direction. A higher social vulnerability index indicates increased social vulnerability. For example, high rates of rates of unemployment increase social vulnerability. Conversely, high rates of education decrease social vulnerability. So, in the case of educational attainment, directionality must be considered to account for the inverse relationship between educational attainment and social vulnerability. The table below shows each unit of measurement for the Social Vulnerability Index, as well as it's direction in relation to social vulnerability. 
 
+#### Social Vulnerability Scoring System Table
+
+![alt text](https://github.com/arielfanderson/Maine-BroadBand-Composite-Index/blob/main/svtable.png "Social Vulnerability Table") 
 
 
 
