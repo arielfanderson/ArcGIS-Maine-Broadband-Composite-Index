@@ -21,7 +21,6 @@ Weighting of variables and variable selection can have considerable influence on
 # Technologies
 * ArcGIS
 * LucidChart
-* Python
 
 # Methodology
 
@@ -32,14 +31,28 @@ The flow chart shows the variables and dimensions used for this project derived 
 
 Social Vulnerability was the first dimension determined for this analysis. In a composite index analysis each dimension represents an index which is broken down into multiple variables. A Social Vulnerability Index is then calculated which will be combined with a Geographic Factor Index to determine a final composite index. Social Vulnerability was divided into three variables: educational attainment defined as the rate of the population with a high school degree (includes alternatives such as GED) or higher, healthcare access determined by the mean travel time to a primary care provider, and rate of unemployment among the population age 16 and over. Educational attainment and unemployment data were obtained from ACS 5 year 2021 estimate, and healthcare data was provided by JSI Health. 
 
-### Preprocessing SV Data: 
+The first step of this analysis looks at the social vulnerability at the subcounty level in Maine. Subcounties are defined by the Census Bureau, [read more about subcounty divisions](https://www2.census.gov/geo/pdfs/reference/GARM/Ch8GARM.pdf). 
 
-ACS data was available by township and did not require preprocessing. However, healthcare data was provided by zipcode, which required preprocessing to the appropriate spatial unit. Areal Interpolation, as suggested by ESRI best practices for Composite Index calculation, was used to reaggregate the healthcare data to the appropriate spatial unit. Interpolation is a method to aggregate data through prediction by fitting the data to a statistical model.  
+Social Vulnerability includes: 
+	* Rate of High School Graduation ([ACS Data](https://www.census.gov/programs-surveys/acs))
+	* Average Driving Distance from a Primary Care Provider (provided by John Snow Institute, this is not publically accessible data) 
+	* Rate of Unemployment ([ACS Data](https://www.census.gov/programs-surveys/acs))
+	* Whether or not a sub county is rural by [NTIA](https://www.ntia.gov/). (In Maine all subcounties are considered rural except by NTIA for: Falmouth, Westbrook, Portland, and South Portland) 
+	* Rate of incarceration ([2020 DEC Redistrciting Data](https://www.census.gov/programs-surveys/decennial-census/about/rdo/summary-files.html)]
+ * [Covered Population Data from the American Census Survey](https://www.census.gov/programs-surveys/acs) (Rate of Population over the age of 60, Rate of Veterans, Limited English Households, Disability, & Rate of Ethnic or Racial Minorities)
+
+### Preprocessing Social Vulnerability Data: 
+
+ACS data was available by township and did not require preprocessing. However, healthcare data was provided by zipcode, which required preprocessing to the appropriate spatial unit. [Areal Interpolation](https://pro.arcgis.com/en/pro-app/latest/help/analysis/geostatistical-analyst/what-is-areal-interpolation.htm), as suggested by ESRI best practices for Composite Index calculation, was used to reaggregate the healthcare data to the appropriate spatial unit. Interpolation is a method to aggregate data through prediction by fitting the data to a statistical model.  
+
 Because Areal Interpolation relies on modeling data, it was determined that a K-Bessel model was an appropriate fit producing a Root Mean Square Standardization of 1.528, which should be ideally close to 1, and neighbor weights of 1 minimum to 10 maximum. 
 
 ### K-Bessel Model for Areal Interpolation 
 
- Normal QQ Plot and Summary for K-Bessel Model 
+Normal QQ Plot and Summary for K-Bessel Model 
+
+### Social Vulnerability Scoring System 
+
 
 
 
