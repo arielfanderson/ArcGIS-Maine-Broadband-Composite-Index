@@ -25,7 +25,10 @@ Weighting of variables and variable selection can have considerable influence on
 # Methodology
 
 The best practices for determining Composite Index are outlined in this documentation from ESRI. The index question used for this analysis was: what locations are best suited for Connectivity Hubs funds? 
-The flow chart shows the variables and dimensions used for this project derived from the driving question of the analysis. The spatial units determined for this project was Maine Townships boundaries.
+The flow chart shows the dimensions, Social Vulnerability and Proximity, as well as the variables for each dimension used for this project derived from the driving question of the analysis. The spatial units determined for this project was Maine Townships boundaries.
+
+![alt-text](https://github.com/arielfanderson/ArcGIS-Maine-Broadband-Composite-Index/blob/main/Composite%20Index.jpeg)
+
 
 ### Social Vulnerability Dimension: 
 
